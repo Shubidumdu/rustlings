@@ -2,7 +2,7 @@
 // Make me compile without changing line 13!
 // Execute `rustlings hint move_semantics2` for hints :)
 
-// I AM NOT DONE
+// I AM DONE
 
 // 1. `vec0`으로부터 새로운 변수를 복사하여 사용
 
