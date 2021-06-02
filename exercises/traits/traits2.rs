@@ -10,7 +10,7 @@
 // No boiler plate code this time,
 // you can do this!
 
-// I AM NOT DONE
+// I AM DONE
 
 trait AppendBar {
   fn append_bar(self) -> Self;
