@@ -8,36 +8,40 @@
 // which appends "Bar" to any object
 // implementing this trait.
 
-// I AM NOT DONE
+// I AM DONE
 
 trait AppendBar {
-    fn append_bar(self) -> Self;
+  fn append_bar(self) -> Self;
 }
 
 impl AppendBar for String {
-    //Add your code here
+  //Add your code here
+  fn append_bar(self) -> String {
+    let new_string = self + "Bar";
+    new_string
+  }
 }
 
 fn main() {
-    let s = String::from("Foo");
-    let s = s.append_bar();
-    println!("s: {}", s);
+  let s = String::from("Foo");
+  let s = s.append_bar();
+  println!("s: {}", s);
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+  use super::*;
 
-    #[test]
-    fn is_FooBar() {
-        assert_eq!(String::from("Foo").append_bar(), String::from("FooBar"));
-    }
+  #[test]
+  fn is_FooBar() {
+    assert_eq!(String::from("Foo").append_bar(), String::from("FooBar"));
+  }
 
-    #[test]
-    fn is_BarBar() {
-        assert_eq!(
-            String::from("").append_bar().append_bar(),
-            String::from("BarBar")
-        );
-    }
+  #[test]
+  fn is_BarBar() {
+    assert_eq!(
+      String::from("").append_bar().append_bar(),
+      String::from("BarBar")
+    );
+  }
 }
