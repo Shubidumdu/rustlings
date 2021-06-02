@@ -16,41 +16,44 @@
 //
 // Execute `rustlings hint box1` for hints :)
 
-// I AM NOT DONE
+// I AM DONE
 
 #[derive(PartialEq, Debug)]
 pub enum List {
-    Cons(i32, List),
-    Nil,
+  Cons(i32, Box<List>),
+  Nil,
 }
 
+use List::Cons;
+use List::Nil;
+
 fn main() {
-    println!("This is an empty cons list: {:?}", create_empty_list());
-    println!(
-        "This is a non-empty cons list: {:?}",
-        create_non_empty_list()
-    );
+  println!("This is an empty cons list: {:?}", create_empty_list());
+  println!(
+    "This is a non-empty cons list: {:?}",
+    create_non_empty_list()
+  );
 }
 
 pub fn create_empty_list() -> List {
-    unimplemented!()
+  Nil
 }
 
 pub fn create_non_empty_list() -> List {
-    unimplemented!()
+  Cons(27, Box::new(Nil))
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+  use super::*;
 
-    #[test]
-    fn test_create_empty_list() {
-        assert_eq!(List::Nil, create_empty_list())
-    }
+  #[test]
+  fn test_create_empty_list() {
+    assert_eq!(List::Nil, create_empty_list())
+  }
 
-    #[test]
-    fn test_create_non_empty_list() {
-        assert_ne!(create_empty_list(), create_non_empty_list())
-    }
+  #[test]
+  fn test_create_non_empty_list() {
+    assert_ne!(create_empty_list(), create_non_empty_list())
+  }
 }

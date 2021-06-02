@@ -12,7 +12,6 @@
 // Because we are using threads, our values need to be thread-safe.  Therefore,
 // we are using Arc.  We need to make a change in each of the two TODOs.
 
-
 // Make this code compile by filling in a value for `shared_numbers` where the
 // first TODO comment is, and create an initial binding for `child_numbers`
 // where the second TODO comment is. Try not to create any copies of the `numbers` Vec!
@@ -25,23 +24,23 @@ use std::sync::Arc;
 use std::thread;
 
 fn main() {
-    let numbers: Vec<_> = (0..100u32).collect();
-    let shared_numbers = // TODO
-    let mut joinhandles = Vec::new();
+  let numbers: Vec<_> = (0..100u32).collect();
+  let shared_numbers = Arc::new(numbers); // TODO
+  let mut joinhandles = Vec::new();
 
-    for offset in 0..8 {
-        let child_numbers = // TODO
-        joinhandles.push(thread::spawn(move || {
-            let mut i = offset;
-            let mut sum = 0;
-            while i < child_numbers.len() {
-                sum += child_numbers[i];
-                i += 8;
-            }
-            println!("Sum of offset {} is {}", offset, sum);
-        }));
-    }
-    for handle in joinhandles.into_iter() {
-        handle.join().unwrap();
-    }
+  for offset in 0..8 {
+    let child_numbers = Arc::clone(&shared_numbers); // TODO
+    joinhandles.push(thread::spawn(move || {
+      let mut i = offset;
+      let mut sum = 0;
+      while i < child_numbers.len() {
+        sum += child_numbers[i];
+        i += 8;
+      }
+      println!("Sum of offset {} is {}", offset, sum);
+    }));
+  }
+  for handle in joinhandles.into_iter() {
+    handle.join().unwrap();
+  }
 }
